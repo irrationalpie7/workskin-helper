@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Markdown editor</title>
-    <!-- Editor's Style -->
+    <!-- Toast editor style -->
     <link
       rel="stylesheet"
       href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
@@ -11,11 +11,13 @@
   </head>
   <body>
     <!-- Toast editor -->
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <script>
-      import Editor from "https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js";
+      const Editor = toastui.Editor;
       const editor = new Editor({
         el: document.getElementById("editor"),
       });
+      window.editor = editor;
       // window.gifa11y = gifa11y;
       // setTimeout(() => {
       //   gifa11y.findNew();
