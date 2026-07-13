@@ -17,14 +17,13 @@
     <!-- Toast editor setup -->
     <script>
       const Editor = toastui.Editor;
-      const editor = new Editor({
-        el: document.getElementById("editor"),
-      });
-      window.editor = editor;
-      // window.gifa11y = gifa11y;
-      // setTimeout(() => {
-      //   gifa11y.findNew();
-      // }, 3_000);
+      // Setup the editor after the page finished loading
+      setTimeout(() => {
+        const editor = new Editor({
+          el: document.getElementById("editor"),
+        });
+        window.editor = editor;
+      }, 3_000);
     </script>
   </body>
 </html>
