@@ -1,10 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <title>Hello world</title>
+    <meta charset="UTF-8" />
+    <title>Markdown editor</title>
+    <!-- Editor's Style -->
+    <link
+      rel="stylesheet"
+      href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
+    />
   </head>
   <body>
-    Hello world for workskin site.
+    <!-- Toast editor -->
+    <script>
+      import Editor from "https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js";
+      const editor = new Editor({
+        el: document.getElementById("editor"),
+      });
+      // window.gifa11y = gifa11y;
+      // setTimeout(() => {
+      //   gifa11y.findNew();
+      // }, 3_000);
+    </script>
+    <h1>Markdown editor!</h1>
+    <div id="editor"></div>
   </body>
 </html>
