@@ -1,4 +1,4 @@
-const { Marked } = marked;
+import { Marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
 /* [chat pov="Name 1"] [/chat] */
 /* (doesn't support nested tag of same type) */
