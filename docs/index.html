@@ -10,19 +10,26 @@
     />
   </head>
   <body>
-    <!-- Toast editor import -->
-    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-    <h1>Markdown editor!</h1>
+    <h1>Workskin editor</h1>
+    <div id="exports"><button id="export">Export HTML</button></div>
     <div id="editor"></div>
-    <!-- Toast editor setup -->
+
+    <!-- Page setup -->
+    <script src="./marked.js" defer></script>
+    <script src="./toast.js" defer></script>
     <script>
-      const Editor = toastui.Editor;
+      function setupExport() {
+        const button = document.getElementById("export");
+        button.addEventListener("click", () => {
+          const html = editor.getHtml();
+          // FIXME do something better with this
+          console.log(html);
+        });
+      }
+
       // Setup the editor after the page finished loading
       setTimeout(() => {
-        const editor = new Editor({
-          el: document.getElementById("editor"),
-        });
-        window.editor = editor;
+        setupExport();
       }, 3_000);
     </script>
   </body>
