@@ -18,7 +18,7 @@ function htmlOpenCloseRegex(tag) {
 
 function isValid(tag) {
   const validTagRule = /^[a-zA-Z]+$/;
-  const match = rule.exec(text);
+  const match = validTagRule.exec(text);
   return !!match;
 }
 
