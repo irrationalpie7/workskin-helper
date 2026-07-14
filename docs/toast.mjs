@@ -17,6 +17,9 @@ function phonePlugin() {
     phone(node) {
       const [header, rest] = node.literal.trim().split("\n", 2);
       // $$phone [pov: Character, Character Alias 1, Character Alias 2] [heading]
+      console.log("about to parse phone:");
+      console.log(header);
+      console.log(rest);
       const regex = new RegExp("^\\[pov:(.*?)\\](?:\\s+\\[(.*?)\\])?$");
       const match = regex.exec(header.trim());
       const rawPOV = match
@@ -28,13 +31,18 @@ function phonePlugin() {
 
       const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest}`;
 
+      console.log("to be parsed:");
+      console.log(newLiteral);
       const html = marked.parse(newLiteral);
       // see https://github.com/cure53/DOMPurify#how-do-i-use-it
       const clean = DOMPurify.sanitize(html);
+      console.log("post parsing:");
+      console.log(html);
+      console.log(clean);
 
       return [
         div(true, "phone"),
-        { type: "html", content: html },
+        { type: "html", content: clean },
         div(false, "phone"),
       ];
     },
