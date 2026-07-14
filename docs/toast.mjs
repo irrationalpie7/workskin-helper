@@ -1,5 +1,5 @@
-import Editor from "https://uicdn.toast.com/dist/esm/index.js";
-const { codeSyntaxHighlight } = Editor.plugin;
+import { marked } from "./marked.mjs";
+const { Editor } = toastui;
 
 function div(entering, className) {
   return {
@@ -40,11 +40,13 @@ function phonePlugin() {
   return { toHTMLRenderers };
 }
 
-const editor = new Editor({
-  // Where to put the editor
-  el: document.getElementById("editor"),
-  previewStyle: "vertical",
-  initialEditType: "wysiwyg",
-  plugins: [phonePlugin, [codeSyntaxHighlight, { highlighter: Prism }]],
-});
-window.editor = editor;
+export function createEditor(element) {
+  const { codeSyntaxHighlight } = Editor.plugin;
+  return new Editor({
+    // Where to put the editor
+    el: element,
+    previewStyle: "vertical",
+    initialEditType: "wysiwyg",
+    plugins: [phonePlugin, [codeSyntaxHighlight, { highlighter: Prism }]],
+  });
+}

@@ -188,5 +188,4 @@ function toCssClass(text) {
   return `char-${norm}`;
 }
 
-const marked = new Marked([{ extensions: [phoneHeader, texts] }]);
-window.myMarked = marked;
+export const marked = new Marked([{ extensions: [phoneHeader, texts] }]);

@@ -8,20 +8,26 @@
       rel="stylesheet"
       href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.4.11/purify.min.js"
+      integrity="sha512-vBe+8DnrK9HGgW5O2AOqY/sJxCkEXEilaOolPs6lx/dxgn9K7dJIsHCOYAJL9ZaqImJbeV9MQsLLaSToUWSCXQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
   </head>
   <body>
     <h1>Workskin editor</h1>
     <div id="exports"><button id="export">Export HTML</button></div>
     <div id="editor"></div>
 
-    <!-- Page setup -->
-    <script src="./marked.js" type="module"></script>
-    <script src="./toast.js" type="module"></script>
-    <script>
+    <!-- Editor setup -->
+    <script type="module">
+      import { createEditor } from "./toast.mjs";
       function setupExport() {
         const button = document.getElementById("export");
         button.addEventListener("click", () => {
-          const html = editor.getHtml();
+          const html = window.editor.getHtml();
           // FIXME do something better with this
           console.log(html);
         });
@@ -29,17 +35,9 @@
 
       // Setup the editor after the page finished loading
       setTimeout(() => {
+        window.editor = createEditor(document.getElementById("editor"));
         setupExport();
       }, 3_000);
-    </script>
-    <!-- Try different editor? -->
-    <form method="post" action="/submit">
-      <textarea id="markdown-editor" name="content"># Hello World</textarea>
-      <button type="submit">Save</button>
-    </form>
-    <script type="module">
-      import MarkdownEditor from "https://cdn.jsdelivr.net/npm/markdown-text-editor/dist/markdown-text-editor.es.js";
-      new MarkdownEditor("#markdown-editor");
     </script>
   </body>
 </html>
