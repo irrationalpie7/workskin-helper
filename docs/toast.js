@@ -1,4 +1,4 @@
-import { Editor } from "https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js";
+const { Editor } = toastui;
 const { codeSyntaxHighlight } = Editor.plugin;
 
 function div(entering, className) {
