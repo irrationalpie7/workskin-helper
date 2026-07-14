@@ -1,4 +1,4 @@
-import { Editor } from "https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js";
+import Editor from "https://uicdn.toast.com/editor/latest/toastui-editor.min.js";
 const { codeSyntaxHighlight } = Editor.plugin;
 
 function div(entering, className) {
@@ -44,6 +44,7 @@ const editor = new Editor({
   // Where to put the editor
   el: document.getElementById("editor"),
   previewStyle: "vertical",
+  initialEditType: "wysiwyg",
   plugins: [phonePlugin, [codeSyntaxHighlight, { highlighter: Prism }]],
 });
 window.editor = editor;
