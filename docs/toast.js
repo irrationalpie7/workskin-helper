@@ -1,4 +1,4 @@
-import Editor from "https://uicdn.toast.com/editor/latest/esm/index.js";
+import Editor from "https://uicdn.toast.com/dist/esm/index.js";
 const { codeSyntaxHighlight } = Editor.plugin;
 
 function div(entering, className) {
