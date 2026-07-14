@@ -1,5 +1,7 @@
 import { marked } from "./marked.mjs";
 const { Editor } = toastui;
+// FIXME ??
+console.log(toastui);
 
 function div(entering, className) {
   return {
