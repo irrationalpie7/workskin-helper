@@ -27,7 +27,7 @@ function parseAttributes(openingTag) {
   // quotes can't contain " (non-greedy)
   const attrRegex = /\s([a-zA-Z]*)="(.*?)"/gs;
   let match;
-  while ((match = regex.exec(str)) !== null) {
+  while ((match = attrRegex.exec(openingTag)) !== null) {
     attrs[match[1]] = match[2];
   }
   return attrs;
