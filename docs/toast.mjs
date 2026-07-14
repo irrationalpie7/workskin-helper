@@ -41,12 +41,12 @@ function phonePlugin() {
 }
 
 export function createEditor(element) {
-  const { codeSyntaxHighlight } = Editor.plugin;
+  // const { codeSyntaxHighlight } = Editor.plugin;
   return new Editor({
     // Where to put the editor
     el: element,
     previewStyle: "vertical",
     initialEditType: "wysiwyg",
-    plugins: [phonePlugin, [codeSyntaxHighlight, { highlighter: Prism }]],
+    plugins: [phonePlugin], //, [codeSyntaxHighlight, { highlighter: Prism }]],
   });
 }
