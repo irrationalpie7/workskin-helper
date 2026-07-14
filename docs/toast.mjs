@@ -26,7 +26,7 @@ function phonePlugin() {
 
       const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest}`;
 
-      const html = window.myMarked.parse(newLiteral);
+      const html = marked.parse(newLiteral);
       // see https://github.com/cure53/DOMPurify#how-do-i-use-it
       const clean = DOMPurify.sanitize(html);
 
