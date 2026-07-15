@@ -50,25 +50,26 @@ function customBlock(blockName) {
     tokenizer(src, tokens) {
       const rule = htmlOpenCloseRegex(blockName);
       const match = rule.exec(src);
-      if (match) {
-        const raw = match[0]; // Text to consume from the source
-        const attributes = parseAttributes(match[1], blockName);
-        customBlockAttributes[blockName].attributes = attributes;
-        const innerText = match[2].trim();
-        const rawToken = {
-          // Additional custom properties
-          text: innerText,
-          ...attributes,
-          // Overwrite parsed attrs with required ones
-          type: blockName,
-          raw,
-          tokens: [], // Array where child inline tokens will be generated
-        };
-        this.lexer.blockTokens(token.text, token.tokens); // Process nested blocks
-        // remove attributes
-        customBlockAttributes[blockName] = undefined;
-        return token;
+      if (!match) {
+        return [];
       }
+      const raw = match[0]; // Text to consume from the source
+      const attributes = parseAttributes(match[1], blockName);
+      customBlockAttributes[blockName].attributes = attributes;
+      const innerText = match[2].trim();
+      const rawToken = {
+        // Additional custom properties
+        text: innerText,
+        ...attributes,
+        // Overwrite parsed attrs with required ones
+        type: blockName,
+        raw,
+        tokens: [], // Array where child inline tokens will be generated
+      };
+      this.lexer.blockTokens(token.text, token.tokens); // Process nested blocks
+      // remove attributes
+      customBlockAttributes[blockName] = undefined;
+      return token;
     },
     renderer(token) {
       return `<div class=${blockName}>${this.parser.parse(token.tokens)}\n</div>\n`;
@@ -147,31 +148,32 @@ const texts = {
     // but gets interrupted by empty line or new character)
     const rule = /^([^:\n]*?[^\s:]+):(([^:\n]+(?:\n|$))+)/m;
     const match = rule.exec(src);
-    if (match) {
-      const raw = match[0];
-      // FIXME: return early if charName isn't supported?
-      // Or have a max length?
-      const charName = match[1] ?? textInfo.charName;
-      textInfo.charName = charName;
-      const texts = match[2];
-      // Special casing for "info" type
-      const subType = textSubType(charName);
-      // FIXME: special behavior for pov char?
-      const token = {
-        type: "texts",
-        subType,
-        raw,
-        charName,
-        charDisplay: [],
-        text: texts,
-        tokens: [],
-      };
-      this.lexer.blockTokens(token.text, token.tokens); // Process nested blocks
-      if (subType !== "info") {
-        this.lexer.inline(token.charName, token.charDisplay); // Queue charName for inline processing
-      }
-      return token;
+    if (!match) {
+      return [];
     }
+    const raw = match[0];
+    // FIXME: return early if charName isn't supported?
+    // Or have a max length?
+    const charName = match[1] ?? textInfo.charName;
+    textInfo.charName = charName;
+    const texts = match[2];
+    // Special casing for "info" type
+    const subType = textSubType(charName);
+    // FIXME: special behavior for pov char?
+    const token = {
+      type: "texts",
+      subType,
+      raw,
+      charName,
+      charDisplay: [],
+      text: texts,
+      tokens: [],
+    };
+    this.lexer.blockTokens(token.text, token.tokens); // Process nested blocks
+    if (subType !== "info") {
+      this.lexer.inline(token.charName, token.charDisplay); // Queue charName for inline processing
+    }
+    return token;
   },
   renderer(token) {
     // FIXME: merge character with next token if next token is a paragraph?
