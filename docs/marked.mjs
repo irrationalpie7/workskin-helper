@@ -198,6 +198,7 @@ const walkTokens = (token) => {
   }
 };
 
-export const marker = new Marked([
-  { extensions: [phoneHeader, texts], walkTokens },
-]);
+export const marker = new Marked({
+  extensions: [phoneHeader, texts],
+  walkTokens,
+});
