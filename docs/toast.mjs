@@ -10,7 +10,7 @@ function div(entering, className) {
   };
 }
 
-function phone(node) {
+const phone = (node) => {
   const [header, ...rest] = node.literal.trim().split("\n");
   // $$phone
   // [pov: Character, Character Alias 1, Character Alias 2] [heading]
@@ -33,7 +33,7 @@ function phone(node) {
     { type: "html", content: clean },
     div(false, "phone"),
   ];
-}
+};
 
 export function createEditor(element) {
   return new Editor({

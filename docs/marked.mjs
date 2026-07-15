@@ -35,7 +35,7 @@ function parseAttributes(openingTag) {
 
 const customBlockAttributes = {};
 
-function customBlock(blockName, prelex) {
+function customBlock(blockName) {
   if (!isValid(blockName)) {
     console.log(`Discarding rule with invalid name: '${blockName}'`);
     return null;
@@ -64,8 +64,7 @@ function customBlock(blockName, prelex) {
           raw,
           tokens: [], // Array where child inline tokens will be generated
         };
-        const text = preprocess(token.text, token.tokens);
-        this.lexer.blockTokens(text, token.tokens); // Process nested blocks
+        this.lexer.blockTokens(token.text, token.tokens); // Process nested blocks
         // remove attributes
         customBlockAttributes[blockName] = undefined;
         return token;
@@ -188,10 +187,11 @@ function toCssClass(text) {
   return `char-${norm}`;
 }
 
-function walkNodes(node) {}
-
 // Override function
 const walkTokens = (token) => {
+  if (!token) {
+    return;
+  }
   console.log(`Walking token: ${token.type}`);
   if (token.type === "text") {
     console.log(token.text);
