@@ -57,7 +57,7 @@ function customBlock(blockName) {
       const attributes = parseAttributes(match[1], blockName);
       customBlockAttributes[blockName].attributes = attributes;
       const innerText = match[2].trim();
-      const rawToken = {
+      const token = {
         // Additional custom properties
         text: innerText,
         ...attributes,
