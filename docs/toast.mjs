@@ -13,7 +13,7 @@ function div(entering, className) {
 }
 
 function phone(node) {
-  const [header, rest] = node.literal.trim().split("\n", 2);
+  const [header, ...rest] = node.literal.trim().split("\n");
   // $$phone [pov: Character, Character Alias 1, Character Alias 2] [heading]
   console.log("about to parse phone:");
   console.log(node);
@@ -29,7 +29,7 @@ function phone(node) {
     ? (match[2] ?? "").trim()
     : `Invalid header: '${header.trim()}'`;
 
-  const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest}`;
+  const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest.join("\n")}`;
 
   console.log("to be parsed:");
   console.log(newLiteral);
