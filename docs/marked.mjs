@@ -167,7 +167,7 @@ const texts = {
         tokens: [],
       };
       this.lexer.blockTokens(token.text, token.tokens); // Process nested blocks
-      if (type !== "info") {
+      if (subType !== "info") {
         this.lexer.inline(token.charName, token.charDisplay); // Queue charName for inline processing
       }
       return token;
