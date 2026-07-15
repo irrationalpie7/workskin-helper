@@ -23,7 +23,7 @@ const phone = (node) => {
     ? (match[2] ?? "").trim()
     : `Invalid header: '${header.trim()}'`;
 
-  const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest.join("\n")}`;
+  const newLiteral = `[phoneHeader pov="${rawPOV.join(",")}"]${rawHeader}[/phoneHeader]\n\n${rest.join("\n")}`;
 
   const html = marker.parse(newLiteral);
   const clean = DOMPurify.sanitize(html);

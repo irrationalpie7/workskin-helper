@@ -204,7 +204,8 @@ export const marker = new Marked({
 });
 
 // FIXME: quick test
-const test = `[pov: a] [heading hello]
+const test = `[phoneHeader pov="a"]accurate heading[/phoneHeader]
+
 info: lsdkfldj
 
 a: lsdkjfdl pov
