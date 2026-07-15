@@ -204,9 +204,7 @@ export const marker = new Marked({
 });
 
 // FIXME: quick test
-console.log(
-  marker.parse(
-    ```
+const test = ```
 [pov: a] [heading hello]
 info: lsdkfldj
 
@@ -232,6 +230,7 @@ a: not-pov
 
 b: pov
 
-  ```,
-  ),
-);
+  ```;
+console.log("Parsing test:");
+console.log(test);
+console.log(marker.parse(test));
