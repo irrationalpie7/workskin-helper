@@ -202,3 +202,36 @@ export const marker = new Marked({
   extensions: [phoneHeader, texts],
   walkTokens,
 });
+
+// FIXME: quick test
+console.log(
+  marker.parse(
+    ```
+[pov: a] [heading hello]
+info: lsdkfldj
+
+a: lsdkjfdl pov
+b: lsdkjflkdj not pov
+a: sldkjfdlj
+- sldkfjd
+- sldkjfdlk
+- lskdjfls
+
+sldkjfdlk
+
+lsdkjfdsl
+
+lsdkjflkdf
+
+b: lskjfldskfjd
+
+[pov: b] [heading goodbye]
+info: lsdkfldj
+
+a: not-pov
+
+b: pov
+
+  ```,
+  ),
+);
