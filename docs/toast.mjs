@@ -1,4 +1,4 @@
-import { marker as marked } from "./marked.mjs";
+import { marker } from "./marked.mjs";
 const { Editor } = toastui;
 
 function div(entering, className) {
@@ -25,7 +25,7 @@ const phone = (node) => {
 
   const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest.join("\n")}`;
 
-  const html = marked.parse(newLiteral);
+  const html = marker.parse(newLiteral);
   const clean = DOMPurify.sanitize(html);
 
   return [
