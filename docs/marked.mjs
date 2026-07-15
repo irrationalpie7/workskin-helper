@@ -188,4 +188,16 @@ function toCssClass(text) {
   return `char-${norm}`;
 }
 
-export const marked = new Marked([{ extensions: [phoneHeader, texts] }]);
+function walkNodes(node) {}
+
+// Override function
+const walkTokens = (token) => {
+  console.log(`Walking token: ${token.type}`);
+  if (token.type === "text") {
+    console.log(token.text);
+  }
+};
+
+export const marker = new Marked([
+  { extensions: [phoneHeader, texts], walkTokens },
+]);

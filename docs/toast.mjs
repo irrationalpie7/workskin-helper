@@ -1,7 +1,5 @@
-import { marked } from "./marked.mjs";
+import { marker as marked } from "./marked.mjs";
 const { Editor } = toastui;
-// FIXME ??
-console.log(toastui);
 
 function div(entering, className) {
   return {
@@ -14,12 +12,8 @@ function div(entering, className) {
 
 function phone(node) {
   const [header, ...rest] = node.literal.trim().split("\n");
-  // $$phone [pov: Character, Character Alias 1, Character Alias 2] [heading]
-  console.log("about to parse phone:");
-  console.log(node);
-  console.log(node.literal);
-  console.log(header);
-  console.log(rest);
+  // $$phone
+  // [pov: Character, Character Alias 1, Character Alias 2] [heading]
   const regex = new RegExp("^\\[pov:(.*?)\\](?:\\s+\\[(.*?)\\])?$");
   const match = regex.exec(header.trim());
   const rawPOV = match
@@ -31,14 +25,8 @@ function phone(node) {
 
   const newLiteral = `[heading pov="${rawPOV.join(",")}"]${rawHeader}[/heading]\n\n${rest.join("\n")}`;
 
-  console.log("to be parsed:");
-  console.log(newLiteral);
   const html = marked.parse(newLiteral);
-  // see https://github.com/cure53/DOMPurify#how-do-i-use-it
   const clean = DOMPurify.sanitize(html);
-  console.log("post parsing:");
-  console.log(html);
-  console.log(clean);
 
   return [
     div(true, "phone"),
@@ -48,13 +36,11 @@ function phone(node) {
 }
 
 export function createEditor(element) {
-  // const { codeSyntaxHighlight } = Editor.plugin;
   return new Editor({
     // Where to put the editor
     el: element,
     previewStyle: "vertical",
     initialEditType: "wysiwyg",
     customHTMLRenderer: { phone },
-    // plugins: [phonePlugin], //, [codeSyntaxHighlight, { highlighter: Prism }]],
   });
 }
